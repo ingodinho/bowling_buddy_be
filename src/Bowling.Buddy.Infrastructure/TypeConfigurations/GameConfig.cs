@@ -15,9 +15,12 @@ public class GameConfig : IEntityTypeConfiguration<Game>
         
         builder.HasOne(g => g.Group)
             .WithMany(g => g.Games)
-            .HasForeignKey(g => g.GroupId);
+            .HasForeignKey(g => g.GroupId)
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.Property(g => g.DateTime)
             .IsRequired();
+
+        builder.HasIndex(g => g.GroupId);
     }
 }

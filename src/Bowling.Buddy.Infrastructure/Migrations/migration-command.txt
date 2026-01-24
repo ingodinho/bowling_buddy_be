@@ -1,0 +1,1 @@
+dotnet ef migrations add FixEntityConfigurations -p src/Bowling.Buddy.Infrastructure -s src/Bowling.Buddy.Api -c AppDbContext

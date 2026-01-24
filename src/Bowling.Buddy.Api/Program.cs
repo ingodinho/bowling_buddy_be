@@ -1,3 +1,4 @@
+using Bowling.Buddy.Api.StartupTasks;
 using Bowling.Buddy.Infrastructure.Dependencies;
 using Scalar.AspNetCore;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddInfrastructure(config);
 
 var app = builder.Build();
+app.Services.ApplyInfrastructureStartupTasks();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

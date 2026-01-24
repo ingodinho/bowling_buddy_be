@@ -24,5 +24,7 @@ public class PlayerConfig : IEntityTypeConfiguration<Player>
             .WithMany(p => p.Players)
             .HasForeignKey(p => p.GroupId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.HasIndex(p => p.GroupId);
     }
 }
