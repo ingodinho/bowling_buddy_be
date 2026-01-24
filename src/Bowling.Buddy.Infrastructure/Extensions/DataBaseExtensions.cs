@@ -1,6 +1,7 @@
 using Bowling.Buddy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Bowling.Buddy.Infrastructure.Extensions;
 
@@ -11,7 +12,8 @@ public static class DataBaseExtensions
         using var scope = services.CreateScope();
         
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        // var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+        var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
+        var logger = loggerFactory.CreateLogger(typeof(DataBaseExtensions));
         
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         var isTestEnvironment = environment == "Testing";
@@ -24,12 +26,12 @@ public static class DataBaseExtensions
         var pendingMigrations = dbContext.Database.GetPendingMigrations().ToList();
         if (pendingMigrations.Count != 0)
         {
-            Console.WriteLine($"Applying database migrations on startup: {string.Join(", ", pendingMigrations)}");
+            logger.LogInformation("Applying database migrations on startup: {Migrations}", string.Join(", ", pendingMigrations));
             dbContext.Database.Migrate();
         }
         else
         {
-            Console.WriteLine("No pending migrations in app startup");
+            logger.LogInformation("No pending migrations in app startup");
         }
     }
 }
