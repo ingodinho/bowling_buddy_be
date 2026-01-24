@@ -1,0 +1,18 @@
+using Bowling.Buddy.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Bowling.Buddy.Infrastructure.Dependencies;
+
+public static class InfrastructureDependencies
+{
+    public static void AddInfrastructure(this IServiceCollection services, IConfiguration config)
+    {
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            var connectionString = config.GetConnectionString("BowlingDb");
+            options.UseNpgsql(connectionString);
+        });
+    }
+}
