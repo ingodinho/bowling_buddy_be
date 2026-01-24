@@ -21,6 +21,7 @@ public static class CommonTypeConfigs
         where TEntity : class, IBaseIdEntity
     {
         builder.HasKey(p => p.Id);
-        builder.Property(p => p.Id).IsRequired();
+        builder.Property(p => p.Id)
+            .IsRequired();
     }
 }

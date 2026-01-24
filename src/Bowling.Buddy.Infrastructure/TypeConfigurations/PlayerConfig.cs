@@ -19,5 +19,10 @@ public class PlayerConfig : IEntityTypeConfiguration<Player>
         
         builder.Property(p => p.GroupId)
             .IsRequired();
+        
+        builder.HasOne(p => p.Group)
+            .WithMany(p => p.Players)
+            .HasForeignKey(p => p.GroupId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
