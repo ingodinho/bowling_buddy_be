@@ -1,4 +1,6 @@
+using Bowling.Buddy.Domain.Interfaces.Repositories;
 using Bowling.Buddy.Infrastructure.Data;
+using Bowling.Buddy.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,5 +16,15 @@ public static class InfrastructureDependencies
             var connectionString = config.GetConnectionString("BowlingDb");
             options.UseNpgsql(connectionString);
         });
+
+        services.AddServices();
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IGroupRepository, GroupRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        return services;
     }
 }

@@ -1,4 +1,5 @@
 using Bowling.Buddy.Api.StartupTasks;
+using Bowling.Buddy.Application.Dependencies;
 using Bowling.Buddy.Infrastructure.Dependencies;
 using Scalar.AspNetCore;
 
@@ -8,6 +9,7 @@ var config = builder.Configuration;
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(config);
 
 var app = builder.Build();

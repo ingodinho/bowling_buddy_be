@@ -16,6 +16,8 @@ public class GroupService(IUnitOfWork unitOfWork)
         };
         
         var groupId = await unitOfWork.Groups.AddGroupAsync(groupDbo);
+        await unitOfWork.SaveChangesAsync();
+        
         return OperationResult<Guid>.Success(groupId);
     }
 
