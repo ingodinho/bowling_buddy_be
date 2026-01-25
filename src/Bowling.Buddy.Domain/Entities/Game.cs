@@ -10,5 +10,5 @@ public sealed class Game : IBaseIdEntity
     public string? Description { get; set; }
     
     public Group? Group { get; set; }
-    public ICollection<Score> Scores { get; set; } = new HashSet<Score>();
+    public ICollection<Score>? Scores { get; set; } = new HashSet<Score>();
 }

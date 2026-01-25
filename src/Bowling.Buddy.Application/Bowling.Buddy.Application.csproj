@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Bowling.Buddy.Domain\Bowling.Buddy.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

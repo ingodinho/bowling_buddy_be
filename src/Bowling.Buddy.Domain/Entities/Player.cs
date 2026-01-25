@@ -9,5 +9,5 @@ public sealed class Player : IBaseIdEntity
     public Guid GroupId { get; set; }
     
     public Group? Group { get; set; }
-    public ICollection<Score> Scores { get; set; } = new HashSet<Score>();
+    public ICollection<Score>? Scores { get; set; } = new HashSet<Score>();
 }
