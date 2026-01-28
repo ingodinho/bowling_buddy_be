@@ -1,3 +1,4 @@
+using Bowling.Buddy.Api.Middlewares;
 using Bowling.Buddy.Api.StartupTasks;
 using Bowling.Buddy.Application.Dependencies;
 using Bowling.Buddy.Infrastructure.Dependencies;
@@ -23,6 +24,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 app.MapControllers();
 
 app.Run();
