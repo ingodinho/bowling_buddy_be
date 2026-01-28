@@ -7,23 +7,23 @@ namespace Bowling.Buddy.Application.Services;
 
 public class GroupService(IUnitOfWork unitOfWork)
 {
-    public async Task<OperationResult<Guid>> CreateGroupAsync(string groupName)
+    public async Task<OperationResult<Guid>> CreateGroupAsync(string groupName, CancellationToken cancellationToken = default)
     {
         var groupDbo = new Group
         {
             Id = Guid.NewGuid(),
             Name = groupName
         };
-        
-        var groupId = await unitOfWork.Groups.AddGroupAsync(groupDbo);
-        await unitOfWork.SaveChangesAsync();
-        
+
+        var groupId = await unitOfWork.Groups.AddGroupAsync(groupDbo, cancellationToken);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
         return OperationResult<Guid>.Success(groupId);
     }
 
-    public async Task<OperationResult<GroupDetailDto>> GetGroupDetails(Guid groupId, bool includeScores = false)
+    public async Task<OperationResult<GroupDetailDto>> GetGroupDetails(Guid groupId, bool includeScores = false, CancellationToken cancellationToken = default)
     {
-        var groupDto = await unitOfWork.Groups.GetGroupByIdAsync(groupId, includeScores);
+        var groupDto = await unitOfWork.Groups.GetGroupByIdAsync(groupId, includeScores, cancellationToken);
 
         if (groupDto == null)
         {
@@ -33,9 +33,9 @@ public class GroupService(IUnitOfWork unitOfWork)
         return OperationResult<GroupDetailDto>.Success(groupDto.ToDetailDto());
     }
 
-    public async Task<OperationResult<List<GroupSummaryDto>>> GetAllGroups()
+    public async Task<OperationResult<List<GroupSummaryDto>>> GetAllGroups(CancellationToken cancellationToken = default)
     {
-        var dboList = await unitOfWork.Groups.GetAllGroupsAsync();
+        var dboList = await unitOfWork.Groups.GetAllGroupsAsync(cancellationToken);
         var dtoList = dboList.Select(group => group.ToSummaryDto()).ToList();
         return OperationResult<List<GroupSummaryDto>>.Success(dtoList);
     }

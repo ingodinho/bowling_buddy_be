@@ -7,28 +7,28 @@ namespace Bowling.Buddy.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class GroupController(GroupService groupService, ILogger<GroupController> logger) : ControllerBase
+public class GroupController(GroupService groupService) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateGroup([FromBody] CreateGroupRequest request)
+    public async Task<IActionResult> CreateGroup([FromBody] CreateGroupRequest request, CancellationToken cancellationToken)
     {
-        var result = await groupService.CreateGroupAsync(request.Name);
+        var result = await groupService.CreateGroupAsync(request.Name, cancellationToken);
         return result.ToActionResult(this);
     }
 
     [HttpGet]
     [Route("{groupId:guid}")]
-    public async Task<IActionResult> GetGroup(Guid groupId, [FromQuery] bool includeScores = false)
+    public async Task<IActionResult> GetGroup(Guid groupId, [FromQuery] bool includeScores = false, CancellationToken cancellationToken = default)
     {
-        var result = await groupService.GetGroupDetails(groupId, includeScores);
+        var result = await groupService.GetGroupDetails(groupId, includeScores, cancellationToken);
         return result.ToActionResult(this);
     }
 
     [HttpGet]
     [Route("all")]
-    public async Task<IActionResult> GetAllGroups()
+    public async Task<IActionResult> GetAllGroups(CancellationToken cancellationToken)
     {
-        var result = await groupService.GetAllGroups();
+        var result = await groupService.GetAllGroups(cancellationToken);
         return result.ToActionResult(this);
     }
 }
