@@ -7,6 +7,9 @@ public static class ApplicationDependencies
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        return services.AddScoped<GroupService>();
+        services.AddScoped<GroupService>();
+        services.AddScoped<PlayerService>();
+        
+        return services;
     }
 }

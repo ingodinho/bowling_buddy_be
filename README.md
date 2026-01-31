@@ -12,19 +12,19 @@ Track your bowling stats on your way to mastery
 - [X] Add Scalar for testing
 
 ### Data Models
-- [ ] Create Player, Group, Game, Score entities
-- [ ] Define repository interfaces
-- [ ] Set up database context and migrations
+- [X] Create Player, Group, Game, Score entities
+- [X] Define repository interfaces
+- [X] Set up database context and migrations
 
 ### Business Logic
-- [ ] Build player management (create, list, get one)
-- [ ] Build group management (create, list, add players)
+- [X] Build player management (create, list, get one)
+- [X] Build group management (create, list, add players)
 - [ ] Build game tracking (create game with scores, get games)
 - [ ] Build stats calculation (average, high/low, games played)
 
 ### API Endpoints
-- [ ] Players endpoints
-- [ ] Groups endpoints
+- [X] Players endpoints
+- [X] Groups endpoints
 - [ ] Games endpoints
 - [ ] Stats endpoints
 
@@ -33,6 +33,7 @@ Track your bowling stats on your way to mastery
 - [ ] Record a few games
 - [ ] Check stats look correct
 
+### Add Validation
 ---
 
 ## Phase 2: Add Clerk Auth
@@ -62,3 +63,6 @@ Track your bowling stats on your way to mastery
 - [ ] Add guest player
 - [ ] Guest player signs up and claims their history
 - [ ] Verify users can't access other users' groups
+
+## Phase 3: Validation, Deployment, Options
+## Phase 4: FE APP

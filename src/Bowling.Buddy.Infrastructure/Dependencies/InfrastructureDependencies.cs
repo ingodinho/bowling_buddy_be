@@ -23,6 +23,7 @@ public static class InfrastructureDependencies
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IGroupRepository, GroupRepository>();
+        services.AddScoped<IPlayerRepository, PlayerRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         return services;
