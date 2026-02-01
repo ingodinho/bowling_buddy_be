@@ -29,6 +29,8 @@ public class GameRepository(AppDbContext dbContext, ILogger<GameRepository> logg
     public async Task<List<Game>> GetAllGamesByGroupAsync(Guid groupId, CancellationToken cancellationToken = default)
     {
         var groups = await dbContext.Games
+            .Include(g => g.Scores!)
+            .ThenInclude(g => g.Player)
             .Where(g => g.GroupId == groupId)
             .ToListAsync(cancellationToken: cancellationToken);
         
