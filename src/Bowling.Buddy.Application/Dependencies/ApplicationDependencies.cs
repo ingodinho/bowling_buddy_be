@@ -9,6 +9,7 @@ public static class ApplicationDependencies
     {
         services.AddScoped<GroupService>();
         services.AddScoped<PlayerService>();
+        services.AddScoped<GameService>();
         
         return services;
     }

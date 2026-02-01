@@ -6,11 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Bowling.Buddy.Infrastructure.Repositories;
 
-public class UnitOfWork(AppDbContext dbContext, IGroupRepository groups, IPlayerRepository players, ILogger<UnitOfWork> logger) : IUnitOfWork
+public class UnitOfWork(AppDbContext dbContext, IGroupRepository groups, IPlayerRepository players, IGameRepository games, ILogger<UnitOfWork> logger) : IUnitOfWork
 {
     private IDbContextTransaction? _transaction;
     public IGroupRepository Groups { get; } = groups;
     public IPlayerRepository Players { get; } = players;
+    public IGameRepository Games { get; } = games;
 
     public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
     {

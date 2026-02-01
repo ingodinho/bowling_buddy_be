@@ -24,6 +24,7 @@ public static class InfrastructureDependencies
     {
         services.AddScoped<IGroupRepository, GroupRepository>();
         services.AddScoped<IPlayerRepository, PlayerRepository>();
+        services.AddScoped<IGameRepository, GameRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         return services;

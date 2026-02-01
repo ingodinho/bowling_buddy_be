@@ -8,14 +8,14 @@ namespace Bowling.Buddy.Infrastructure.Repositories;
 
 public class GameRepository(AppDbContext dbContext, ILogger<GameRepository> logger) : IGameRepository
 {
-    public async Task<Guid> AddGameAsync(Game game, CancellationToken cancellationToken)
+    public async Task<Guid> AddGameAsync(Game game, CancellationToken cancellationToken = default)
     {
         logger.LogInformation("Adding game {GameId}", game.Id);
         var result = await dbContext.AddAsync(game, cancellationToken);
         return result.Entity.Id;
     }
 
-    public async Task<Game?> GetGameDetailsByIdAsync(Guid gameId, CancellationToken cancellationToken)
+    public async Task<Game?> GetGameDetailsByIdAsync(Guid gameId, CancellationToken cancellationToken = default)
     {
         var game =  await dbContext.Games
             .Include(g => g.Scores)!
@@ -26,7 +26,7 @@ public class GameRepository(AppDbContext dbContext, ILogger<GameRepository> logg
         return game;
     }
 
-    public async Task<List<Game>> GetAllGamesByGroupAsync(Guid groupId, CancellationToken cancellationToken)
+    public async Task<List<Game>> GetAllGamesByGroupAsync(Guid groupId, CancellationToken cancellationToken = default)
     {
         var groups = await dbContext.Games
             .Where(g => g.GroupId == groupId)
